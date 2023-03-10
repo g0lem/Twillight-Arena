@@ -37,7 +37,7 @@ export class ResolutionContext extends React.Component {
     }
 
     increaseScaling = () => {
-        const scale = this.state.scale + 0.1;
+        const scale = this.state.scale + 0.3;
         if(scale < 5){
             this.setState({scale});
         }
@@ -47,7 +47,7 @@ export class ResolutionContext extends React.Component {
     }
 
     decreaseScaling = () => {
-        const scale = this.state.scale - 0.1;
+        const scale = this.state.scale - 0.3;
         if(scale > 1){
             this.setState({scale});
         }
@@ -63,8 +63,8 @@ export class ResolutionContext extends React.Component {
                     (context) => {
                         return <div onWheel={context.onScroll} style={{position: 'absolute', top: 100, left: 100, transform: `scale(${context.scale}, ${context.scale})`}}>
                             {
-                                [...Array(10)].map((elm, index)=>{
-                                    return <MapRow row={index}/>
+                                [...Array(100)].map((elm, index)=>{
+                                    return <MapRow key={`MAP_ROW_${index}`} row={index}/>
                                 })
                             }
                         </div>

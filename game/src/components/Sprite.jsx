@@ -25,7 +25,7 @@ export class Sprite extends React.Component {
     render() {
         return <div
             style={{
-                backgroundImage: "url('summer.png')",
+                'background-image': "url('summer.png')",
                 backgroundSize: 'auto',
                 backgroundPosition: this.getTranslateSpritePositionString(1, 5),
                 height: SIZE,

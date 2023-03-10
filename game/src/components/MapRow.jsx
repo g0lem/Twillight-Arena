@@ -8,10 +8,10 @@ export class MapRow extends React.Component {
 
     render() {
         return (
-            <div style={{overflow: "hidden", marginTop: -5}}>
+            <div style={{overflow: "hidden", marginTop: -5, display: 'flex', flexWrap: 'nowrap'}}>
                  {
-                    [...Array(10)].map((elm, index)=>{
-                        return <Sprite key={`SPRITE_ROW_${this.props.row}`} index={index}/>
+                    [...Array(100)].map((elm, index)=>{
+                        return <Sprite key={`SPRITE_ROW_${this.props.row}_COLUMN_${index}`} index={index}/>
                     })
                 }
             </div>
