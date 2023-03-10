@@ -8,6 +8,8 @@ import { Sprite } from "../../components/Sprite";
 
 
 const MyResolutionContext = React.createContext({});
+const ResolutionElementId = 'ResolutionComponent';
+
 
 export class ResolutionContext extends React.Component {
 
@@ -27,7 +29,18 @@ export class ResolutionContext extends React.Component {
         setInterval( () => {
             const top = this.state.top - this.state.moveTop;
             const left = this.state.left - this.state.moveLeft;
-            this.setState({top, left});            
+
+            const width = document.getElementById(ResolutionElementId).clientWidth - document.body.clientWidth;
+            const height = document.getElementById(ResolutionElementId).clientHeight - document.body.clientHeight;
+
+            console.log(width)
+
+            if(top <= 0 && -top <= height) {
+                this.setState({top});    
+            }
+            if(left <= 0 && -left <= width) {
+                this.setState({left});
+            }
         }, 100);
     }
 
@@ -96,11 +109,12 @@ export class ResolutionContext extends React.Component {
     render() {
         return <MyResolutionContext.Provider value={{...this.state, increaseScaling: this.increaseScaling, onScroll: this.onScroll}}>
             <div 
-                onWheel={this.onScroll} 
+                onWheel={this.onScroll}
+                id={ResolutionElementId}
                 style={{position: 'absolute', top: 0, left: 0, transform: `translate(${this.state.left}px, ${this.state.top}px) scale(${this.state.scale}, ${this.state.scale})`, transition: `transform 100ms linear`}}
             >
                     {this.props.children}
-                    <Sprite row={10} column={10}/>
+                    {/* <Sprite row={10} column={10}/> */}
             </div>
             <MoveMapUp style={{top: 0, left: 0}} onMouseEnter={this.moveMap} onMouseLeave={this.stopMovingMap}/ >
             <MoveMapDown style={{bottom: 0, left: 0}} onMouseEnter={this.moveMap} onMouseLeave={this.stopMovingMap}/>
