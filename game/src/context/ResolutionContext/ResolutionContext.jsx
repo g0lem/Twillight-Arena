@@ -1,5 +1,6 @@
 import React from "react";
 import { MapHover } from "../../components/MapMovement/MapHover";
+import { MoveMapDown } from "../../components/MapMovement/MoveMapDown";
 import { MoveMapUp } from "../../components/MapMovement/MoveMapUp";
 import { MapRow } from "../../components/MapRow";
 
@@ -89,12 +90,13 @@ export class ResolutionContext extends React.Component {
     render() {
         return <MyResolutionContext.Provider value={{...this.state, increaseScaling: this.increaseScaling, onScroll: this.onScroll}}>
             <MoveMapUp style={{top: 0, left: 0}} onMouseEnter={this.onMouseEnter} onMouseLeave={this.onMouseLeave}/ >
-                <div 
-                    onWheel={this.onScroll} 
-                    style={{position: 'absolute', top: this.state.top, left: this.state.left, transform: `scale(${this.state.scale}, ${this.state.scale})`}}
-                >
-                        {this.props.children}
-                </div>
+            <div 
+                onWheel={this.onScroll} 
+                style={{position: 'absolute', top: 0, left: 0, transform: `translate(${this.state.left}px, ${this.state.top}px) scale(${this.state.scale}, ${this.state.scale})`, transition: `transform 100ms linear`}}
+            >
+                    {this.props.children}
+            </div>
+            <MoveMapDown style={{bottom: 0, left: 0}} onMouseEnter={this.onMouseEnter} onMouseLeave={this.onMouseLeave}/>
         </MyResolutionContext.Provider>
     }
 }
