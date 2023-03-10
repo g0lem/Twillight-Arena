@@ -4,8 +4,12 @@ const SIZE = 32;
 
 export class Sprite extends React.Component {
 
+    constructor(props){
+        super(props);
+    }
+
     onClick = () => {
-        alert(this.props.index);
+        console.log(this.props.row, this.props.column);
     }
 
     translateSpritePosition = (x,y) => {
@@ -27,7 +31,7 @@ export class Sprite extends React.Component {
             style={{
                 backgroundImage: "url('summer.png')",
                 backgroundSize: 'auto',
-                backgroundPosition: this.getTranslateSpritePositionString(1, 5),
+                backgroundPosition: this.getTranslateSpritePositionString(this.props.row % 17 + 1, this.props.column % 17 + 1),
                 height: SIZE,
                 width: SIZE,
                 marginLeft: -1,

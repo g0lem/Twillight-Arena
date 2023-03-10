@@ -1,6 +1,5 @@
 import React from "react";
 import { MapRow } from "../../components/MapRow";
-import { Sprite } from "../../components/Sprite";
 
 
 const MyResolutionContext = React.createContext({});
