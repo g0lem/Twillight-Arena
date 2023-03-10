@@ -7,7 +7,7 @@ export class MapHover extends React.Component {
         return <div style={{
                 position: 'absolute',
                 zIndex: 1000,
-                height: '10vh',
+                height: '15vh',
                 width: '10vw',
                 ...this.props.style,
             }}

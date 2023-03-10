@@ -4,6 +4,7 @@ import { MoveMapLeft } from "../../components/MapMovement/MoveMapLeft";
 import { MoveMapRight } from "../../components/MapMovement/MoveMapRight";
 import { MoveMapUp } from "../../components/MapMovement/MoveMapUp";
 import { MapRow } from "../../components/MapRow";
+import { Sprite } from "../../components/Sprite";
 
 
 const MyResolutionContext = React.createContext({});
@@ -99,6 +100,7 @@ export class ResolutionContext extends React.Component {
                 style={{position: 'absolute', top: 0, left: 0, transform: `translate(${this.state.left}px, ${this.state.top}px) scale(${this.state.scale}, ${this.state.scale})`, transition: `transform 100ms linear`}}
             >
                     {this.props.children}
+                    <Sprite row={10} column={10}/>
             </div>
             <MoveMapUp style={{top: 0, left: 0}} onMouseEnter={this.moveMap} onMouseLeave={this.stopMovingMap}/ >
             <MoveMapDown style={{bottom: 0, left: 0}} onMouseEnter={this.moveMap} onMouseLeave={this.stopMovingMap}/>
