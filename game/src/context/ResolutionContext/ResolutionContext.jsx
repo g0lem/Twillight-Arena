@@ -57,27 +57,23 @@ export class ResolutionContext extends React.Component {
     }
 
     static TestComponent(props) {
-        return (
-            <MyResolutionContext.Consumer>
-                {
-                    (context) => {
-                        return <div onWheel={context.onScroll} style={{position: 'absolute', top: 100, left: 100, transform: `scale(${context.scale}, ${context.scale})`}}>
-                            {
-                                [...Array(100)].map((elm, index)=>{
-                                    return <MapRow key={`MAP_ROW_${index}`} row={index}/>
-                                })
-                            }
-                        </div>
-                    }
-                }
-            </MyResolutionContext.Consumer>
-        )
+
+        return <>
+            {
+                [...Array(100)].map((elm, index)=>{
+                    return <MapRow key={`MAP_ROW_${index}`} row={index}/>
+                })
+            }
+        </>
+        
     }
 
 
     render() {
         return <MyResolutionContext.Provider value={{...this.state, increaseScaling: this.increaseScaling, onScroll: this.onScroll}}>
-            {this.props.children}
+            <div onWheel={this.onScroll} style={{position: 'absolute', top: 100, left: 100, transform: `scale(${this.state.scale}, ${this.state.scale})`}}>
+                {this.props.children}
+            </div>
         </MyResolutionContext.Provider>
     }
 }
