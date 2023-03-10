@@ -5,7 +5,6 @@ export class App extends React.Component {
 
     render() {
         return <div style={{overflow: 'hidden'}}>
-            works
             <ResolutionContext>
                 <ResolutionContext.TestComponent/>
             </ResolutionContext>
