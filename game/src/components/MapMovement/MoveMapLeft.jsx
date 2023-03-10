@@ -3,14 +3,14 @@ import { CAMERA_SENSITIVITY } from "../../utils/constants";
 import { MapHover } from "./MapHover";
 
 
-export class MoveMapUp extends React.Component {
+export class MoveMapLeft extends React.Component {
 
     render() {
         return <MapHover style={{
                 ...this.props.style,
-                width: '100vw',
+                height: '100vw',
             }}
-            onMouseEnter={()=>this.props.onMouseEnter(-CAMERA_SENSITIVITY)}
+            onMouseEnter={()=>this.props.onMouseEnter(undefined,-CAMERA_SENSITIVITY)}
             onMouseLeave={()=>this.props.onMouseLeave()}
         />
     }

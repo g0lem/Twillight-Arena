@@ -1,4 +1,5 @@
 import React from "react";
+import { CAMERA_SENSITIVITY } from "../../utils/constants";
 import { MapHover } from "./MapHover";
 
 
@@ -9,7 +10,7 @@ export class MoveMapDown extends React.Component {
                 ...this.props.style,
                 width: '100vw',
             }}
-            onMouseEnter={()=>this.props.onMouseEnter(10,0)}
+            onMouseEnter={()=>this.props.onMouseEnter(CAMERA_SENSITIVITY)}
             onMouseLeave={()=>this.props.onMouseLeave()}
         />
     }

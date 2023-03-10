@@ -1,6 +1,7 @@
 import React from "react";
-import { MapHover } from "../../components/MapMovement/MapHover";
 import { MoveMapDown } from "../../components/MapMovement/MoveMapDown";
+import { MoveMapLeft } from "../../components/MapMovement/MoveMapLeft";
+import { MoveMapRight } from "../../components/MapMovement/MoveMapRight";
 import { MoveMapUp } from "../../components/MapMovement/MoveMapUp";
 import { MapRow } from "../../components/MapRow";
 
@@ -15,12 +16,18 @@ export class ResolutionContext extends React.Component {
             scale: 1.0,
             left: 0,
             top: 0,
-            mapMoveInterval: null,
+            mapMoveInterval: [],
+            moveTop: 0,
+            moveLeft: 0,
         }
     }
 
     componentDidMount() {
-        
+        setInterval( () => {
+            const top = this.state.top - this.state.moveTop;
+            const left = this.state.left - this.state.moveLeft;
+            this.setState({top, left});            
+        }, 100);
     }
 
     calculateScaling = () => {
@@ -71,32 +78,32 @@ export class ResolutionContext extends React.Component {
         </>
     }
 
-    onMouseEnter = (topDelta = 0, leftDelta = 0) => {
-        const mapMoveInterval = setInterval( () => {
-            const top = this.state.top - topDelta;
-            const left = this.state.left - leftDelta;
-            this.setState({top, left});            
-        }, 100);
-
-        this.setState({mapMoveInterval})
+    moveMap = (topDelta, leftDelta) => {
+        if(topDelta !== undefined) {
+            this.setState({moveTop: topDelta});
+        }
+        if(leftDelta !== undefined) {
+            this.setState({moveLeft: leftDelta});
+        }
     }
 
-    onMouseLeave = () => {
-        clearInterval(this.state.mapMoveInterval);
-        this.setState({mapMoveInterval: null});
+    stopMovingMap = () => {
+        this.moveMap(0,0)
     }
 
 
     render() {
         return <MyResolutionContext.Provider value={{...this.state, increaseScaling: this.increaseScaling, onScroll: this.onScroll}}>
-            <MoveMapUp style={{top: 0, left: 0}} onMouseEnter={this.onMouseEnter} onMouseLeave={this.onMouseLeave}/ >
             <div 
                 onWheel={this.onScroll} 
                 style={{position: 'absolute', top: 0, left: 0, transform: `translate(${this.state.left}px, ${this.state.top}px) scale(${this.state.scale}, ${this.state.scale})`, transition: `transform 100ms linear`}}
             >
                     {this.props.children}
             </div>
-            <MoveMapDown style={{bottom: 0, left: 0}} onMouseEnter={this.onMouseEnter} onMouseLeave={this.onMouseLeave}/>
+            <MoveMapUp style={{top: 0, left: 0}} onMouseEnter={this.moveMap} onMouseLeave={this.stopMovingMap}/ >
+            <MoveMapDown style={{bottom: 0, left: 0}} onMouseEnter={this.moveMap} onMouseLeave={this.stopMovingMap}/>
+            <MoveMapLeft style={{top: 0, left: 0}} onMouseEnter={this.moveMap} onMouseLeave={this.stopMovingMap}/>
+            <MoveMapRight style={{top: 0, right: 0}} onMouseEnter={this.moveMap} onMouseLeave={this.stopMovingMap}/>
         </MyResolutionContext.Provider>
     }
 }

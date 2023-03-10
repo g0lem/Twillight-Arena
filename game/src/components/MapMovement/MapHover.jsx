@@ -8,7 +8,7 @@ export class MapHover extends React.Component {
                 position: 'absolute',
                 zIndex: 1000,
                 height: '10vh',
-                width: '5vw',
+                width: '10vw',
                 ...this.props.style,
             }}
             onMouseEnter={this.props.onMouseEnter}
