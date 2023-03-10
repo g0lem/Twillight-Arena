@@ -9,6 +9,7 @@ export class MapHover extends React.Component {
                 zIndex: 1000,
                 height: '15vh',
                 width: '10vw',
+                cursor: 'all-scroll',
                 ...this.props.style,
             }}
             onMouseEnter={this.props.onMouseEnter}
