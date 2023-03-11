@@ -1,1 +1,3 @@
 export const CAMERA_SENSITIVITY = 20;
+
+export const MOUSE_MOVE_SENSITIVITY = 5;

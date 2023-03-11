@@ -30,7 +30,7 @@ export class Sprite extends React.Component {
         return <div
             className={style.Sprite}
             style={{
-                backgroundImage: "url('summer.png')",
+                backgroundImage: `url('${this.props.spriteSheet}')`,
                 backgroundSize: 'auto',
                 backgroundPosition: Sprite.getTranslateSpritePositionString(this.props.row % 17 + 1, this.props.column % 17 + 1),
                 height: SIZE,
